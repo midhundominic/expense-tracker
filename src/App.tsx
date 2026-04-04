@@ -1,13 +1,21 @@
-import React from 'react'
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { AppProvider } from "./context/AppContext";
+import Dashboard from "./pages/Dashboard";
+import Transactions from "./pages/Transactions";
+import Insights from "./pages/Insights";
 
-
-const App = () => {
+function App() {
   return (
-    <div className="bg-red-600">
-      <h1 className="mt-20 pt-1 text-2xl">Hello</h1>
-      
-    </div>
-  )
+    <AppProvider>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/transactions" element={<Transactions />} />
+          <Route path="/insights" element={<Insights />} />
+        </Routes>
+      </BrowserRouter>
+    </AppProvider>
+  );
 }
 
-export default App
+export default App;
