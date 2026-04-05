@@ -1,36 +1,40 @@
 import Layout from "../../components/layout";
-import SummaryCard from "../../components/dashboard/summeryCard";
+import { SummaryCards } from "../../components/dashboard/summeryCard";
 import BalanceChart from "../../components/Chart/BalanceChart";
 import CategoryChart from "../../components/Chart/CategoryChart";
-import { useApp } from "../../context/AppContext";
+import MonthlyBarChart from "../../components/Chart/MonthlyBarChart";
 
-const Dashboard = () => {
-    const { transactions } = useApp();
-  
-    const income = transactions
-      .filter((t) => t.type === "income")
-      .reduce((a, b) => a + b.amount, 0);
-  
-    const expenses = transactions
-      .filter((t) => t.type === "expense")
-      .reduce((a, b) => a + b.amount, 0);
-  
-    const balance = income - expenses;
-  
-    return (
-      <Layout>
-        <div className="grid md:grid-cols-3 gap-4 mb-6">
-          <SummaryCard title="Balance" value={balance} />
-          <SummaryCard title="Income" value={income} />
-          <SummaryCard title="Expenses" value={expenses} />
+const Dashboard: React.FC = () => {
+  return (
+    <Layout>
+      <div className="space-y-6">
+        <div className="animate-fade-in-up">
+          <h1
+            className="text-xl font-bold"
+            style={{ color: "var(--text-primary)" }}
+          >
+            Overview
+          </h1>
+          <p className="text-sm mt-0.5" style={{ color: "var(--text-muted)" }}>
+            Your complete financial summary at a glance
+          </p>
         </div>
-  
-        <div className="grid md:grid-cols-2 gap-4">
+
+        <div className="animate-fade-in-up stagger-1">
+          <SummaryCards />
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 animate-fade-in-up stagger-2">
           <BalanceChart />
           <CategoryChart />
         </div>
-      </Layout>
-    );
-  };
-  
-  export default Dashboard;
+
+        <div className="animate-fade-in-up stagger-3">
+          <MonthlyBarChart />
+        </div>
+      </div>
+    </Layout>
+  );
+};
+
+export default Dashboard;
