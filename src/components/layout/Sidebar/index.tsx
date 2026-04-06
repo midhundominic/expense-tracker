@@ -126,7 +126,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
               </div>
               <div className="min-w-0">
                 <p className="text-white font-bold text-base leading-none truncate">
-                  FinanceIQ
+                Smart Financial Dashboard
                 </p>
                 <p className="text-slate-400 text-sm mt-1 truncate">
                   Smart Dashboard
@@ -178,7 +178,7 @@ const Sidebar: React.FC<SidebarProps> = ({ collapsed, onToggle }) => {
             style={{ borderColor: "rgba(255,255,255,0.08)" }}
           >
             <p className="text-sm text-slate-500 text-center">
-              FinanceIQ © 2026
+            Smart Financial Dashboard © 2026
             </p>
           </div>
         </div>

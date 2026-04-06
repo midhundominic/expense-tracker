@@ -1,73 +1,79 @@
-# React + TypeScript + Vite
+Smart Financial Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A premium, production-quality financial dashboard built with **React 19**, **TypeScript**, **Tailwind CSS v4**, and **Recharts**.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Quick Start
 
-## React Compiler
-
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+cd finance
+npm install
+npm run dev
+# Open http://localhost:5173
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## Features
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+### Dashboard Overview
+- **3 Summary Cards** (Total Balance, Income, Expenses) with gradient backgrounds and live data
+- **Balance Trend** — Area chart showing monthly income vs expenses with gradient fills
+- **Spending Breakdown** — Donut pie chart categorizing all expenses with percentage tooltips
+- **Monthly Comparison** — Grouped bar chart with net balance in custom tooltip
+
+### Transactions
+- **Full table** with 42 pre-loaded transactions across 6 months
+- **Search** — Real-time search across category, description, date, and amount
+- **Filter** — Type (income/expense) and category chip-style filters
+- **Sort** — Every column is sortable (click header) with asc/desc toggle
+- **Pagination** — 10 rows per page with page navigation
+- **Color-coded** — Income rows show green amounts, expense rows show red amounts
+
+### 
+Role-Based UI
+| Feature | Viewer | Admin |
+|---------|--------|-------|
+| View all data | ✅ | ✅ |
+| Add transaction | ❌ | ✅ |
+| Edit transaction | ❌ | ✅ |
+| Delete transaction | ❌ | ✅ |
+
+Switch roles using the **animated toggle switch** in the Navbar.
+
+### Insights
+- Highest Spending Category
+- Best Saving Month (highest net income)
+- Average Monthly Expense
+- Savings Rate %
+- Top 6 categories ranked with animated progress bars
+- Monthly comparison chart
+- Financial health banner (green if savings rate ≥ 20%, amber otherwise)
+
+### UX Enhancements
+- **Dark Mode** — Full dark theme via CSS variables, toggle in Navbar, persisted to localStorage
+- **Data Persistence** — Transactions, role, and dark mode preference saved to localStorage
+- **Responsive** — Sidebar collapses on mobile with hamburger menu
+- **Animations** — Fade-in, scale-in, stagger delays on all major components
+- **Empty States** — Graceful fallback when no data matches filters
+- **Form Validation** — Required field checks on the Add/Edit modal
+
+
+
+
+##  Tech Stack
+
+| Tech | Version | Usage |
+|------|---------|-------|
+| React | 19 | UI framework |
+| TypeScript | 6 | Type safety |
+| Vite | 8 | Build tool |
+| Tailwind CSS | v4 | Utility styling |
+| Recharts | 3 | Charts & graphs |
+| React Router | 7 | Client-side routing |
+| MUI Icons | 7 | Icon library |
+
+## State Management
+
+All state lives in a single `AppContext` using React's built-in `useState` + `useCallback`. Persisted to `localStorage` via `useEffect`. No external state library required — the structure is modular and could be migrated to Zustand or Redux with minimal changes.
